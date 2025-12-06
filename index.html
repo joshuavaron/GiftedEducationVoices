@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voices In Gifted Education</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#1e3a8a',
+                        'secondary-green': '#059669',
+                        'tertiary-red': '#b91c1c',
+                        'quaternary-yellow': '#d97706',
+                        'axis-label': '#374151',
+                    }
+                }
+            }
+        }
+
+        const pointsData = [
+            {
+                x: 0, y: 0.1,
+                groupName: "Independent Advocates",
+                description: "Independent advocates are generally not affiliated with a particular political institution. They typically publish their opinions and findings in informal mediums, like blogs.",
+                links: [
+                    { text: "Link 1", url: "https://hechingerreport.org/gifted-educations-race-problem/" },
+                    { text: "Link 2", url: "https://www.the74million.org/article/to-make-sure-gifted-kids-get-an-appropriate-education-put-them-in-special-ed/" },
+                    { text: "Link 3", url: "https://fordhaminstitute.org/national/commentary/rethinking-gifted-coverage-media" }
+                ],
+                notes: "Very rarely published in major articles or news sources.",
+                articleTitle: "Critiques and Calls for Reform in Gifted Education",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://hechingerreport.org/gifted-educations-race-problem/?w=300",
+                color: 'bg-secondary-green'
+            },
+            {
+                x: 0.1, y: -0.55,
+                groupName: "Current Students",
+                description: "Current students very rarely publish their perspectives on gifted education. Their opinions generally focus on their own experiences without exploring larger trends.",
+                links: [
+                    { text: "Link 1", url: "https://highschool.latimes.com/features/lifestyle/opinion-the-complexities-of-the-burnt-out-gifted-child/" },
+                    { text: "Link 2", url: "https://globalgtchatpoweredbytagt.wordpress.com/2023/08/" },
+                    { text: "Link 3", url: "https://ieap.educationaladvancement.org/public-support-specific-program-provisions-gifted-education" }
+                ],
+                notes: "By far the hardest sources to find. These voices are almost entirely invisible.",
+                articleTitle: "The Complexities of the 'Burnt-Out Gifted Child'",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://highschool.latimes.com/features/lifestyle/opinion-the-complexities-of-the-burnt-out-gifted-child/?w=300",
+                color: 'bg-purple-600'
+            },
+            {
+                x: -0.1, y: -0.75,
+                groupName: "Academics",
+                description: "Academics publish valuable research on ways to reform and bolster gifted education. However, their research is rarely published in mainstream media sources.",
+                links: [
+                    { text: "Link 1", url: "https://www.apa.org/ed/schools/gifted/rethinking-giftedness.pdf" },
+                    { text: "Link 2", url: "https://psycnet.apa.org/record/2018-64977-001" },
+                    { text: "Link 3", url: "https://culturallyresponsivepedagogy.com.au/wp-content/uploads/2024/11/LADSON-BILLINGS-1995.pdf" }
+                ],
+                notes: "Academics have difficulty convincing schools to apply their research.",
+                articleTitle: "Academic Research on Giftedness and Equity",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://www.scribd.com/document/539615711/Giftedness-Rethinking?w=300",
+                color: 'bg-indigo-700'
+            },
+            {
+                x: 0.6, y: -0.65,
+                groupName: "Former Gifted Students",
+                description: "Former gifted students tend to romanticize their own experience in G&T programs (though some of these stories do point out criticisms).",
+                links: [
+                    { text: "Link 1", url: "https://www.huffpost.com/entry/gifted-and-talented-education-program-90s_n_683de77de4b095a1384139b9" },
+                    { text: "Link 2", url: "https://www.buzzfeed.com/hannahmarder/former-gifted-kids-are-sharing-its-effects" },
+                    { text: "Link 3", url: "https://edtrust.org/blog/gifted-program-changed-my-life/" }
+                ],
+                notes: "Selection bias filters for generally positive perspectives on G&T.",
+                articleTitle: "Reflections on Life as a Former G&T Student",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://www.huffpost.com/entry/gifted-and-talented-education-program-90s_n_683de77de4b095a1384139b9?w=300",
+                color: 'bg-pink-500'
+            },
+            {
+                x: 0.6, y: 0.4,
+                groupName: "Conservative Political Advocates",
+                description: "Conservative political advocates use the media to push a meritocratic view of gifted education. They strongly support its proliferation.",
+                links: [
+                    { text: "Link 1", url: "https://www.foxnews.com/politics/mamdani-torched-over-destructive-plan-axe-nyc-gifted-program-kindergartners" },
+                    { text: "Link 2", url: "https://www.city-journal.org/article/zohran-mamdani-gifted-talented-program-new-york-schools" },
+                    { text: "Link 3", url: "https://www.washingtonpost.com/opinions/2025/10/03/mamdani-gifted-program-new-york-education/" }
+                ],
+                notes: "Bold and aggressive headlines. Compare to Liberal Political Advocates.",
+                articleTitle: "Conservative Defense of Merit-Based G&T Programs",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://www.foxnews.com/politics/mamdani-torched-over-destructive-plan-axe-nyc-gifted-program-kindergartners?w=300",
+                color: 'bg-tertiary-red'
+            },
+            {
+                x: 0.35, y: 0.7,
+                groupName: "Parents",
+                description: "Parents publish their opinions on social media in huge numbers. Although there are (ample) voices on both sides, many of these posts support G&T programs.",
+                links: [
+                    { text: "Link 1", url: "https://nypost.com/2025/10/24/us-news/court-tosses-suit-claiming-nycs-gifted-and-talented-programs-are-racially-biased-win-for-parents/" },
+                    { text: "Link 2", url: "https://www.the74million.org/article/to-make-sure-gifted-kids-get-an-appropriate-education-put-them-in-special-ed/" },
+                    { text: "Link 3", url: "https://www.nbcdfw.com/news/local/mckinney-students-parents-appeal-district-spare-cuts-gifted-talented-program/3805944/" }
+                ],
+                notes: "Social media has made it easier for parents to publish their perspectives.",
+                articleTitle: "Parental Advocacy and Legal Battles Over G&T Access",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://www.the74million.org/article/to-make-sure-gifted-kids-get-an-appropriate-education-put-them-in-special-ed/?w=300",
+                color: 'bg-primary-blue'
+            },
+            {
+                x: 0, y: 0.85,
+                groupName: "Policymakers",
+                description: "The loudest voice by far, policymakers vary wildly in their opinions based on those held by the electorate.",
+                links: [
+                    { text: "Link 1", url: "https://www.nytimes.com/2025/10/03/nyregion/gifted-program-new-york-mamdani-criticism.html" },
+                    { text: "Link 2", url: "https://www.edweek.org/policy-politics/the-push-for-a-60k-minimum-salary-for-teachers-has-reached-congress-again/2025/07" },
+                    { text: "Link 3", url: "https://marshallparthenon.com/37451/news/trump-executive-order-dismantles-department-of-education/" }
+                ],
+                notes: "Often utilizes particular instances for high media impact.",
+                articleTitle: "Government Policy and High-Level Debates on Education",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://marshallparthenon.com/37451/news/trump-executive-order-dismantles-department-of-education/?w=300",
+                color: 'bg-quaternary-yellow'
+            },
+            {
+                x: -0.6, y: 0.55,
+                groupName: "Liberal Political Advocates",
+                description: "Liberal political advocates use the media to push a narrative of equity in the context of gifted education. They generally find G&T programs to be discriminatory.",
+                links: [
+                    { text: "Link 1", url: "https://www.nytimes.com/2025/10/02/nyregion/mamdani-schools-gifted-and-talented-program.html" },
+                    { text: "Link 2", url: "https://www.nbcnews.com/news/education/america-s-gifted-education-programs-have-race-problem-can-it -n1243143" },
+                    { text: "Link 3", url: "https://www.nbcnews.com/news/education/fight-over-gifted-education-new-york-escalating-national-debate-over-n1048516" }
+                ],
+                notes: "Solutions-oriented headlines. Compare to Conservative Political Advocates.",
+                articleTitle: "Liberal Arguments for Equity in Gifted Education",
+                articleUrl: "https://s0.wp.com/mshots/v1/https://www.nbcnews.com/news/education/america-s-gifted-education-programs-have-race-problem-can-it-n1243143?w=300",
+                color: 'bg-teal-500'
+            },
+        ];
+
+        function coordsToPercentage(x, y) {
+            const left = (x + 1) * 50;
+            const top = (1 - y) * 50;
+            return { left, top };
+        }
+
+        function handlePointClick(point) {
+            const leftPanel = document.getElementById('left-panel');
+            const rightPanel = document.getElementById('right-panel');
+
+            const leftHtml = `
+                <div class="p-4 w-full h-full flex flex-col justify-center items-center text-center">
+                    <h3 class="text-2xl font-extrabold mb-2 ${point.color.replace('bg-', 'text-')}">${point.groupName}</h3>
+                    
+                    <h4 class="font-bold mt-2 text-gray-800">Brief Description:</h4>
+                    <p class="text-sm italic text-gray-600 mb-4 max-w-xs">${point.description}</p>
+                    
+                    <h4 class="font-bold mt-4 text-gray-800 border-t border-gray-200 pt-3">Links to Their Voices:</h4>
+                    <ul class="list-none max-w-min text-sm space-y-2">
+                        ${point.links.length > 0 ? point.links.map(link => `
+                            <li class="hover:text-primary-blue transition duration-150 whitespace-nowrap">
+                                <a href="${link.url}" target="_blank" class="underline font-medium">${link.text}</a>
+                            </li>
+                        `).join('') : '<li class="text-gray-500 italic">No direct links available.</li>'}
+                    </ul>
+                    
+                    <h4 class="font-bold mt-4 text-gray-800 border-t border-gray-200 pt-3">Quick Notes:</h4>
+                    <p class="text-xs text-gray-700 italic max-w-xs">${point.notes || 'No quick notes provided.'}</p>
+                </div>
+            `;
+
+            const rightHtml = `
+                <div class="p-4 w-full h-full flex flex-col justify-center items-center text-center">
+                    <h4 class="font-extrabold text-xl text-gray-800 mb-2">${point.groupName} in the media:</h4>
+                    <p class="text-sm text-gray-500 mb-2 italic">(${point.articleTitle})</p>
+
+                    <iframe 
+                        src="${point.articleUrl}" 
+                        class="w-full h-64 sm:h-80 md:h-96 border-4 border-gray-200 rounded-lg shadow-inner"
+                        title="${point.articleTitle} Placeholder"
+                    ></iframe>
+                </div>
+            `;
+            
+            leftPanel.classList.add('opacity-0');
+            rightPanel.classList.add('opacity-0');
+            leftPanel.innerHTML = '';
+            rightPanel.innerHTML = '';
+
+            leftPanel.className = leftPanel.className.replace(/justify-start|items-start|justify-center|items-center/g, 'flex flex-col justify-center items-center text-center');
+            rightPanel.className = rightPanel.className.replace(/justify-start|items-start|justify-center|items-center/g, 'flex flex-col justify-center items-center text-center');
+
+
+            setTimeout(() => {
+                leftPanel.innerHTML = leftHtml;
+                rightPanel.innerHTML = rightHtml;
+
+                leftPanel.classList.remove('opacity-0');
+                rightPanel.classList.remove('opacity-0');
+            }, 300);
+        }
+
+        function renderPoints() {
+            const container = document.getElementById('interactive-points');
+            if (!container) return;
+
+            pointsData.forEach(point => {
+                const { left, top } = coordsToPercentage(point.x, point.y);
+
+                const button = document.createElement('button');
+                button.className = `
+                    absolute 
+                    w-4 h-4 rounded-full shadow-lg border-2 border-white
+                    hover:scale-150 transition-all duration-200 ease-in-out
+                    ${point.color}
+                `;
+                
+                button.style.left = `calc(${left}% - 8px)`;
+                button.style.top = `calc(${top}% - 8px)`;
+                
+                button.title = point.groupName;
+
+                button.onclick = () => handlePointClick(point);
+
+                container.appendChild(button);
+            });
+        }
+
+        window.onload = renderPoints;
+    </script>
+</head>
+
+<body class="font-sans bg-gray-100 p-4 md:p-8 min-h-screen flex flex-col">
+
+    <header class="text-center mb-8">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-primary-blue">
+            Voices In Gifted Education
+        </h1>
+        <h2 class="text-lg md:text-xl font-semibold text-secondary-green mt-1">
+            An Interactive Stakeholder Map
+        </h2>
+    </header>
+
+    <div class="flex-grow flex items-center justify-center py-4 px-2">
+        <div class="max-w-6xl w-full flex items-stretch justify-center space-x-4 md:space-x-8">
+
+            <div id="left-panel" class="w-1/4 p-4 bg-white rounded-xl shadow-lg flex flex-col justify-center items-center text-center transition-all duration-300 min-h-[400px]">
+                <p class="text-gray-400 font-extrabold text-lg">Click a point on the map...</p>
+            </div>
+
+            <div class="
+                relative 
+                aspect-square
+                w-1/2
+                max-w-[80vh] 
+                max-h-[80vh]
+            ">
+                
+                <div class="absolute inset-0 grid grid-cols-2 grid-rows-2 border-4 border-axis-label rounded-xl overflow-hidden shadow-2xl">
+
+                    <div class="bg-secondary-green bg-opacity-80 flex items-center justify-center text-center p-4 border-b border-r border-white border-opacity-40">
+                        <span class="text-white font-bold text-sm sm:text-lg md:text-xl">Nonsympathetic / Loud</span>
+                    </div>
+
+                    <div class="bg-tertiary-red bg-opacity-80 flex items-center justify-center text-center p-4 border-b border-l border-white border-opacity-40">
+                        <span class="text-white font-bold text-sm sm:text-lg md:text-xl">Sympathetic / Loud</span>
+                    </div>
+
+                    <div class="bg-primary-blue bg-opacity-80 flex items-center justify-center text-center p-4 border-t border-r border-white border-opacity-40">
+                        <span class="text-white font-bold text-sm sm:text-lg md:text-xl">Nonsympathetic / Quiet</span>
+                    </div>
+
+                    <div class="bg-quaternary-yellow bg-opacity-80 flex items-center justify-center text-center p-4 border-t border-l border-white border-opacity-40">
+                        <span class="text-white font-bold text-sm sm:text-lg md:text-xl">Sympathetic / Quiet</span>
+                    </div>
+
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 text-xs md:text-sm font-extrabold text-axis-label bg-gray-100 px-1 rounded">
+                        LOUD
+                    </div>
+
+                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs md:text-sm font-extrabold text-axis-label bg-gray-100 px-1 rounded">
+                        QUIET
+                    </div>
+
+                    <div class="absolute right-[-45px] top-1/2 -translate-y-1/2 text-xs md:text-sm font-extrabold text-axis-label -rotate-90 whitespace-nowrap bg-gray-100 py-0.5 px-1 rounded hidden sm:block">
+                        SYMPATHETIC
+                    </div>
+                     <div class="absolute left-[-55px] top-1/2 -translate-y-1/2 text-xs md:text-sm font-extrabold text-axis-label rotate-90 whitespace-nowrap bg-gray-100 py-0.5 px-1 rounded hidden sm:block">
+                        NONSYMPATHETIC
+                    </div>
+
+                </div>
+                
+                <div id="interactive-points" class="absolute inset-0">
+                </div>
+            </div>
+
+            <div id="right-panel" class="w-1/4 p-4 bg-white rounded-xl shadow-lg flex flex-col justify-center items-center text-center transition-all duration-300 min-h-[400px]">
+                   <p class="text-gray-400 font-extrabold text-lg">...to see their media presence.</p>
+            </div>
+
+        </div>
+    </div>
+    
+    <p class="text-center mt-4 text-gray-600 italic max-w-2xl mx-auto text-sm">
+        Click on any colored circle to reveal the specific voices mapped to that location.
+    </p>
+
+</body>
+</html>
